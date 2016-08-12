@@ -1,0 +1,23 @@
+二進制檔案讀寫
+
+除了文字檔，我們也可能保存 int、float 等變數的數值或是 byte 資料，這時候使用二進制檔案（binary）就比較方便了。
+
+
+
+int value = 43;
+
+using (FileStream output = File.Create("binarydata.dat")) {         // 寫入整數值
+
+    BinaryWriter writer = new BinaryWriter(output);
+
+    writer.Write(value);
+
+}
+
+using (FileStream input = new FileStream(@"binarydata.dat", FileMode.Open)) {   // 讀取整數值
+
+    BinaryReader reader = new BinaryReader(input);
+
+    int data = reader.ReadInt16();
+
+}

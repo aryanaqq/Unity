@@ -1,0 +1,40 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public class Test: MonoBehaviour {
+ 
+ public struct Student
+ {
+  public string Name;
+  public int Score;
+
+  public Student(string name, int score)
+  {
+   this.Name = name;
+   this.Score = score;
+  }
+ }
+ 
+ void Start()
+ {
+  List students = new List()
+  { 
+   new Student("Tim", 80),
+   new Student("Jimmy", 76),
+   new Student("David", 92),
+   new Student("Jason", 57),
+   new Student("Amy", 40)
+  };
+  
+  // 利用 Lambda 運算式，由大到小排序
+  students.Sort((x, y) => { return -x.Score.CompareTo(y.Score); });
+  
+  foreach (var item in students)
+  {
+   Debug.Log(item.Name + " : " + item.Score);
+  }
+ }
+}
+
+顯示結果會將分數由大到小排列

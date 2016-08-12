@@ -1,0 +1,10 @@
+Hi
+This is a way to get your geometry axis right when exporting from 3DS Max to Unity using FBX.
+
+If you make ex. a tube in your FRONT window and export with Y as up axis in the FBX exporter, you get the right axis conversion in Unity= Forward/depth is Z, up is Y, right is x, and still having the rotation in Unity as 0,0,0
+
+Making your objects in front view give you X 90,Y 0,Z 0
+in rotation. 
+So just as long as you in Max have X 90,Y 0,Z 0 in rotation and export with Y as up in FBX, you should be fine.
+
+Cheers

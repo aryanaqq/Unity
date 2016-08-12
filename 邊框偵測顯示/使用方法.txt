@@ -1,0 +1,2 @@
+To use: 1.Put "EdgeDetectionColorsEditor" file in the Editor Folder. 2. Similar to other image effects, add the image effect to the camera through Image Effects -> Edge Detection -> Edge Detection Color
+Note: only works for triangle depth normals and robert cross depth normals

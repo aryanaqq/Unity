@@ -1,0 +1,37 @@
+自訂 Unity 工具列選單處理專案內容
+
+一般我們使用 Unity 主要是用來製作 Client 內容播放與操作，但製作遊戲或任何系統軟體，比較少被注意到卻很重要的就是編輯或後端工具，雖然 Unity 編輯器本身就很強大且方便了，但有時候還是有些客制化需求，希望能更方便於我們製作及設置遊戲，所以 Unity 的 Script 除了有運作遊戲內容的 Runtime Classes 之外還有 Editor Classes，它其中一個功能就是可以讓我們自訂工具列選單，選單命令的動作就像我們平常撰寫 script 一樣，相當方便。
+
+
+通常我們自己建立的 class 只要是繼承 MonoBehaviour，都會自動在工具列中的 Component/Scripts 出現，如果為 class 加上 AddComponentMenu 則可以為此 class 定義它在 Component 選單內的路徑，如下所示(也可參考官網 )..
+
+//Javascript 
+@script AddComponentMenu ("MyScripts/My Unity Script")
+class MyUnityScript extends MonoBehaviour {
+ .....
+}
+
+// C#
+[AddComponentMenu("MyScripts/My C# Script")]
+public class MyCSharpScript : MonoBehaviour{
+ .....
+}
+
+其實 Javascript 部份的寫法不需要特別宣告 class 繼承 MonoBehaviour，因為 Unity 在編譯時會自動為 Javascript 處理這個部份，所以只要在程式檔內找個地方插入 AddComponentMenu 那一行就可以了。
+
+這種自訂工具列選單的方式只是運用在為物件加入 Component，如果我們在編輯遊戲時，常有一連串動作需要常常重複操作，此時就能利用 Editor Classes 的 MenuItem 另外自訂工具列選單做為執行命令，製作重點及步驟如下(官網說明 )...
+
+
+在 Project 視窗任意路徑建立名為 Editor 的目錄。
+在 Editor 目錄內建立新的 script 檔。
+如果是使用 C# 請記得 using UnityEditor;。
+給工具列選單呼叫的 method 必須為 static。
+在被呼叫執行的 method 上一行加入 MenuItem，Javascript 的寫法為 @MenuItem("選單路徑字串")，C# 的寫法 [MenuItem ("選單路徑字串")]
+視需求為自訂選單命令加入快捷鍵，在【選單路徑字串】後空一格加入參數字元，% 符號代表Ctrl鍵，# 符號代表Shift鍵，& 符號代表Alt鍵，_ 符號代表無功能鍵，例如 %&b 代表按住 Ctrl+Alt 再按 B 鍵可執行此選單命令。
+
+[MenuItem("Custom Editor/Menu Test %&b")]
+static void CustomMenuTest(){
+ ....
+}
+
+很簡單的就建立自訂工具列選單，而且如果有指定快捷鍵的話，Unity 也將自動在選單項目的後面加註按鍵名稱；接下來就能依照個人需求在點選選單時對場景中的物件或 Project 視窗中的資源進行各種操作，像是... 在場景中產生新的 GameObject 添加需要的 Component 並調整數據後利用此 GameObject 製作新的 Prefab，或是在 Project 視窗複製多個 Material 並為它們個別調整設定，甚至是在硬碟的其它路徑建立新的資料夾並將在 Project 視窗中所選擇的資源做成 Assetbundle 儲存到該資料夾中，怎麼做就看大家如何運用囉！

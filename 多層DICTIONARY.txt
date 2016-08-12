@@ -1,0 +1,43 @@
+If you are trying to group values together this may be a great opportunity to create a simple struct or class and use that as the value in a dictionary.
+
+
+public struct MyValue
+{
+    public object Value1;
+    public double Value2;
+}
+
+
+then you could have your dictionary
+
+
+
+var dict = new Dictionary<int, MyValue>();
+
+
+
+you could even go a step further and implement your own dictionary class that will handle any special operations that you would need. for example if you wanted to have an Add method that accepted an int, object, and double
+
+
+
+
+public class MyDictionary : Dictionary<int, MyValue>
+{
+    public void Add(int key, object value1, double value2)
+    {
+        MyValue val;
+        val.Value1 = value1;
+        val.Value2 = value2;
+        this.Add(key, val);
+    }
+}
+
+
+
+then you could simply instantiate and add to the dictionary like so and you wouldn't have to worry about creating 'MyValue' structs:
+
+
+
+
+var dict = new MyDictionary();
+dict.Add(1, new Object(), 2.22);

@@ -1,0 +1,77 @@
+using UnityEngine;
+using System.Collections;
+
+public class SetPropertyExample : MonoBehaviour
+{
+    [System.Serializable]    //自創CLASS沒繼承MONO 所以要加這行
+    public class VanillaClass
+    {
+        public enum ExtraType
+        {
+            None,
+            HotFudge,
+            Mint,
+        }
+
+        [SerializeField, SetProperty("Extra")]
+        private ExtraType extra;
+        public ExtraType Extra
+        {
+            get
+            {
+                return extra;
+            }
+            set
+            {
+                extra = value;
+
+                // For illustrative purposes
+                if (value == ExtraType.None)
+                {
+                    Debug.Log("Simple!");
+                }
+                else
+                {
+                    Debug.Log("Yummy!");
+                }
+            }
+        }
+    }
+
+    [SerializeField, SetProperty("Number")]
+    private float number;
+    public float Number
+    {
+        get
+        {
+            return number;
+        }
+        private set
+        {
+            number = Mathf.Clamp01(value);
+        }
+    }
+
+    [SerializeField, SetProperty("Text")]
+    private string text;
+    public string Text
+    {
+        get
+        {
+            return text;
+        }
+        set
+        {
+            text = value.ToUpper();
+        }
+    }
+
+    public void T() {
+        Debug.Log(Text);
+        Debug.Log(Number);
+        
+    }
+
+
+    public VanillaClass vanilla;
+}
